@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_beneficiaries
+    description: "Conformed beneficiary dimension - union of 2008/2009/2010"
+    columns:
+      - name: beneficiary_id
+        data_tests:
+          - not_null
+      - name: calendar_year
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [2008, 2009, 2010]
+      - name: sex
+        data_tests:
+          - accepted_values:
+              values: ['M', 'F']
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - beneficiary_id
+            - calendar_year
+
+  - name: stg_inpatient_claims
+    description: "Inpatient hospital claims 2008-2010. Grain = claim_id + segment (a single claim can have multiple segment rows)."
+    columns:
+      - name: claim_id
+        data_tests:
+          - not_null
+      - name: beneficiary_id
+        data_tests:
+          - not_null
+      - name: admission_date
+        data_tests:
+          - not_null
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - claim_id
+            - segment

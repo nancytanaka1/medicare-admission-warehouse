@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_synpuf
+    database: MA_PAYER
+    schema: RAW_SYNPUF
+    description: "CMS DE-SynPUF Sample 1 - raw claims tables"
+    tables:
+      - name: BENEFICIARY_2008
+      - name: BENEFICIARY_2009
+      - name: BENEFICIARY_2010
+      - name: INPATIENT_CLAIMS
+      - name: OUTPATIENT_CLAIMS
+      - name: CARRIER_CLAIMS
+      - name: PRESCRIPTION_DRUG_EVENTS

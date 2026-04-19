@@ -1,0 +1,4 @@
+-r requirements.txt
+dbt-core==1.8.*
+dbt-snowflake==1.8.*
+snowflake-snowpark-python==1.23.*

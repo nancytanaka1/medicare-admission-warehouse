@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+.dbt/
+dbt_packages/
+target/
+logs/
+
+# OS / editors
+.DS_Store
+*.log
+
+# Secrets - never commit
+.env
+.streamlit/secrets.toml
+**/secrets.toml
+**/connections.toml
+*.p8
+*.pem
+*_rsa_key*

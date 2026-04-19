@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_beneficiary
+    description: "One row per beneficiary with latest-year demographics and chronic flags"
+    columns:
+      - name: beneficiary_id
+        data_tests:
+          - unique
+          - not_null
+      - name: sex
+        data_tests:
+          - accepted_values:
+              values: ['M', 'F']
+
+  - name: fct_admission
+    description: "Grain = one inpatient admission. Collapses claim segments to claim level."
+    columns:
+      - name: claim_id
+        data_tests:
+          - unique
+          - not_null
+      - name: beneficiary_id
+        data_tests:
+          - not_null
+      - name: admission_date
+        data_tests:
+          - not_null
+
+  - name: fct_readmission_30d
+    description: "One row per index admission with 30-day all-cause readmission flag (HEDIS-style proxy)"
+    columns:
+      - name: index_claim_id
+        data_tests:
+          - unique
+          - not_null
+      - name: is_30d_readmit
+        data_tests:
+          - not_null
+      - name: days_to_readmit
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
